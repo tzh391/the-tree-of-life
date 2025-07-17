@@ -7558,6 +7558,7 @@ addLayer("sci", {
                                 if (amt.lte(1)) return new Decimal("1.01e105")
                                 if (amt.lte(2)) return new Decimal("3.71e106")
                                 if (amt.lte(3)) return new Decimal("6.25e106")
+                                if (amt.lte(4)) return new Decimal("1.44e143")
                                 return Decimal.tetrate(9, amt.pow(2).times(3).div(1e4).plus(2.3704))
                         },
                         unlocked(){
@@ -10118,7 +10119,7 @@ addLayer("c", {
                                 return "Square base Nitrogen gain"
                         },
                         cost(){
-                                return Decimal.pow(10, player.extremeMode ? 54500 : 69000)
+                                return Decimal.pow(10, player.extremeMode ? 54900 : 69000)
                         },
                         unlocked(){
                                 return (hasMilestone("n", 10) && player.p.unlocked) || hasUpgrade("o", 32)
@@ -10619,7 +10620,7 @@ addLayer("o", {
                         description(){
                                 return "Add .08 to color gain exponent and apply the prior upgrade again"
                         },
-                        cost:() => Decimal.pow(10, player.extremeMode ? 372e3 : 314e3),
+                        cost:() => Decimal.pow(10, player.extremeMode ? 377e3 : 314e3),
                         unlocked(){
                                 return (hasMilestone("n", 10) && player.p.unlocked) || hasUpgrade("o", 31)
                         }, // hasUpgrade("o", 32)
@@ -11679,11 +11680,11 @@ addLayer("n", {
                         name: "Sixteen",
                         challengeDescription: "Fourteen and you can't gain A Points",
                         goalDescription(){
-                                if (player.extremeMode) return "e332,560,000 Points"
+                                if (player.extremeMode) return "e332,120,000 Points"
                                 return "e253,800,000 Points"
                         },
                         goal(){
-                                if (player.extremeMode) return Decimal.pow(10, 332560e3)
+                                if (player.extremeMode) return Decimal.pow(10, 332120e3)
                                 return Decimal.pow(10, 2538e5)
                         },
                         canComplete: () => player.points.gte(tmp.n.challenges[41].goal),
@@ -12472,7 +12473,7 @@ addLayer("p", {
                         },
                         cost:() => new Decimal(player.extremeMode ? "e6e45" : "e2e45"),
                         unlocked(){
-                                return player.a.unlocked || player.l.challenges[11] >= (player.extremeMode ? 79 : 83)
+                                return player.a.unlocked || player.l.challenges[11] >= (player.extremeMode ? 79 : 81)
                         }, // hasUpgrade("p", 42)
                 },
                 43: {
@@ -12523,7 +12524,7 @@ addLayer("p", {
                         cost:() => new Decimal(player.extremeMode ? "e1.4e46" : "e3.5e45"),
                         unlocked(){
                                 if (player.extremeMode) return player.a.unlocked || player.l.challenges[11] >= 89
-                                return player.a.unlocked || player.l.challenges[11] >= 93 && player.l.best.gte(6e105)
+                                return player.a.unlocked || player.l.challenges[11] >= 93 && player.l.best.gte(5e105)
                         }, // hasUpgrade("p", 51)
                 },
                 52: {
@@ -13716,7 +13717,7 @@ addLayer("mu", {
                         },
                         cost:() => new Decimal(player.extremeMode ? 2e30 : 3e31),
                         unlocked(){
-                                return player.l.challenges[11] >= (player.extremeMode ? 54 : 49) || player.a.unlocked
+                                return player.l.challenges[11] >= (player.extremeMode ? 54 : 48) || player.a.unlocked
                         }, // hasUpgrade("mu", 42)
                 },
                 43: {
@@ -13728,7 +13729,7 @@ addLayer("mu", {
                         },
                         cost:() => new Decimal(player.extremeMode ? 3e30 : 4e31),
                         unlocked(){
-                                return player.l.challenges[11] >= (player.extremeMode ? 55 : 51) || player.a.unlocked
+                                return player.l.challenges[11] >= (player.extremeMode ? 55 : 50) || player.a.unlocked
                         }, // hasUpgrade("mu", 43)
                 },
                 44: {
@@ -16789,7 +16790,7 @@ addLayer("l", {
                 31: {
                         title: "𝛾 → ∂α",
                         cost(){
-                                let init = new Decimal(player.extremeMode ? 2e80 : 7e84)
+                                let init = new Decimal(player.extremeMode ? 2e80 : 6e84)
                                 let base = new Decimal(player.extremeMode ? 987 : 158)
                                 if (hasMilestone("cells", 34)) base = decimalTwo
                                 if (hasMilestone("l", 38) && player.extremeMode) init = decimalOne
@@ -16806,7 +16807,7 @@ addLayer("l", {
                         getMaxAfford(){
                                 if (!hasMilestone("d", 19)) return
                                 let pts = player.l.points
-                                let init = player.extremeMode ? 2e80 : 7e84
+                                let init = player.extremeMode ? 2e80 : 6e84
                                 let base = player.extremeMode ? 987 : 158
                                 if (hasMilestone("cells", 34)) base = 2
                                 if (hasMilestone("l", 38) && player.extremeMode) init = 1
@@ -16870,8 +16871,8 @@ addLayer("l", {
                                 let allEff = "<b><h2>Effect formula</h2>:<br>" + eformula + "</b><br>"
 
                                 let cost1 = "<b><h2>Cost formula</h2>:<br>"
-                                let cost2 = "7e84*158^(x<sup>1+x/" + formatWhole(tmp.l.buyables[31].expDiv) + "</sup>)"
-                                if (player.extremeMode)         cost2 = cost2.replace("7e84*158", "2e80*987")
+                                let cost2 = "6e84*158^(x<sup>1+x/" + formatWhole(tmp.l.buyables[31].expDiv) + "</sup>)"
+                                if (player.extremeMode)         cost2 = cost2.replace("6e84*158", "2e80*987")
                                 if (hasMilestone("l", 38) && player.extremeMode) {
                                                                 cost2 = cost2.slice(5,)
                                 }
@@ -17660,7 +17661,7 @@ addLayer("l", {
 
                                 return base.pow(comps)
                         },
-                        goal: () => Decimal.pow(10, Decimal.pow(10, player.extremeMode ? 675900 : 579200)),
+                        goal: () => Decimal.pow(10, Decimal.pow(10, player.extremeMode ? 675900 : 579195)),
                         canComplete(){ 
                                 if (player.l.challenges[11] < 110) return false
                                 return player.points.gt(tmp.l.challenges[71].goal)
@@ -17669,8 +17670,8 @@ addLayer("l", {
                         fullDisplay(){
                                 if (hasMilestone("or", 14)) return makeRed("<h3>Ineffective</h3>")
                                 let a = "Dilation at 110 completions, subtract .2 from the Dilation exponent, and nullify µ effect"
-                                let b = "Goal: e1e579,200 Points"
-                                if (player.extremeMode) b = b.replace("579,200", "675,900")
+                                let b = "Goal: e1e579,195 Points"
+                                if (player.extremeMode) b = b.replace("579,195", "675,900")
                                 let c = "Reward: Per Anti- challenge exponentiate Phosphorus gain ^ log10(miRNA) but nullify µ effect"
                                 let d = "Currently: " + format(tmp.l.challenges[71].reward)
 
@@ -17732,7 +17733,7 @@ addLayer("l", {
                 }, // inChallenge("l", 81) hasChallenge("l", 81)
                 82: {
                         name: "Anti-Rho", 
-                        goal: () => Decimal.pow(10, Decimal.pow(10, player.extremeMode ? 1981e3 : 1989e3)),
+                        goal: () => Decimal.pow(10, Decimal.pow(10, player.extremeMode ? 1981e3 : 1988900)),
                         canComplete(){ 
                                 if (player.l.challenges[11] < 110) return false
                                 return player.points.gt(tmp.l.challenges[82].goal)
@@ -17741,8 +17742,8 @@ addLayer("l", {
                         fullDisplay(){
                                 if (hasMilestone("or", 15)) return makeRed("<h3>Ineffective</h3>")
                                 let a = "Dilation at 110 completions and subtract .26 from the Dilation exponent"
-                                let b = "Goal: e1e1,989,000 Points"
-                                if (player.extremeMode) b = b.replace("989", "981")
+                                let b = "Goal: e1e1,988,900 Points"
+                                if (player.extremeMode) b = b.replace("1,988,900", "1,981,000")
                                 let c = "Reward: Add .0001 to tRNA base"
 
                                 return a + br + b + br + c
@@ -29511,7 +29512,7 @@ addLayer("or", {
                         }
                         if (hasUpgrade("sp", 151))      ret = ret.times(player.an.grid[107].extras.plus(1).pow(player.nu.points.times(2)))
                         if (hasUpgrade("sci", 652))     ret = ret.times(tmp.sci.upgrades[652].effect)
-                        if (hasUpgrade("or", 154)) {
+                        if (player.extremeMode && hasUpgrade("or", 154)) {
                                 let exp = player.or.buyables[402].sqrt()
                                                         ret = ret.times(player.or.energy.points.max(10).log10().pow(exp))
                         }
@@ -38036,8 +38037,11 @@ addLayer("ch", {
                 }
                 let pts = tmp.ch.effectPoints
 
-                if (player.extremeMode) if (pts.gte(81) && !hasMilestone("an", 32)) pts = pts.times(141).sub(4860).sqrt()
-                else if (pts.gte(95) && !hasMilestone("an", 32)) pts = pts.times(190).sub(9025).sqrt()
+                if (player.extremeMode && pts.gte(81) && !hasMilestone("an", 32)) {
+    pts = pts.times(141).sub(4860).sqrt();
+} else if (!player.extremeMode && pts.gte(95) && !hasMilestone("an", 32)) {
+    pts = pts.times(190).sub(9025).sqrt();
+}
                 
 
                 let ret = pts.div(player.extremeMode ? 60 : 100).plus(2)
@@ -38625,10 +38629,10 @@ addLayer("ch", {
                 }, // hasMilestone("ch", 14)
                 15: {
                         requirementDescription(){
-                                return "242 Chromosomes"
+                                return "241 Chromosomes"
                         },
                         done(){
-                                return player.ch.points.gte(242)
+                                return player.ch.points.gte(241)
                         },
                         unlocked(){
                                 return true
@@ -39005,8 +39009,11 @@ addLayer("ch", {
                                         let a = "Chromosomes only resets Gene amounts."
                                         let b = "Chromosome effect is 2+x/100."
                                         if (hasMilestone("ch", 10))             b = b.replace("2+x/100", "1.004<sup>x</sup>*2")
-                                        if (player.extremeMode) if (player.ch.points.gte(95) && !hasMilestone("an", 32)) b += br + "Effect after 80 is softcapped, x ⭢ (141*x-4860)<sup>.5</sup>"
-                                        else if (player.ch.points.gte(95) && !hasMilestone("an", 32)) b += br + "Effect after 95 is softcapped, x ⭢ (190*x-9025)<sup>.5</sup>"
+                                        if (player.extremeMode && player.ch.points.gte(95) && !hasMilestone("an", 32)) {
+    b += br + "Effect after 80 is softcapped, x ⭢ (141*x-4860)<sup>.5</sup>";
+} else if (!player.extremeMode && player.ch.points.gte(95) && !hasMilestone("an", 32)) {
+    b += br + "Effect after 95 is softcapped, x ⭢ (190*x-9025)<sup>.5</sup>";
+}
                                         if (hasMilestone("an", 32))             b = b.replace("1.004<sup>x</sup>*2", "1.002<sup>x</sup>*2.66")
                                         if (player.extremeMode)                 b = b.replace("2.66", "3.43")
                                         if (hasMilestone("ch", 20))             b = b.replace(".66", ".605")
@@ -41673,7 +41680,7 @@ addLayer("sp", {
                                 if (player.e.challenges[11] > 0) return tmp.e.challenges[11].chromosomelessBase
                                 return new Decimal(player.sp.challenges[11]).pow(1 + hasMilestone("sp", 17)).times(50).max(1)
                         },
-                        goal: () => Decimal.pow(10, [54153.7, 62138.7, 67327, 74132, 77414, 1e6][player.sp.challenges[11]]),
+                        goal: () => Decimal.pow(10, [54045, 61320, 67210, 74040, 77287, 1e6][player.sp.challenges[11]]),
                         canComplete(){ 
                                 return player.an.genes.points.gte(tmp.sp.challenges[11].goal)
                         },
@@ -41700,7 +41707,7 @@ addLayer("sp", {
                         reward(){
                                 return new Decimal(player.sp.challenges[12] * .2).times(1 + hasUpgrade("sp", 101))
                         },
-                        goal: () => Decimal.pow(10, [145553.7, 158027, 172950, 201412, 256811, 1e6][player.sp.challenges[12]]),
+                        goal: () => Decimal.pow(10, [145525, 158027, 175900, 201410, 256811, 1e6][player.sp.challenges[12]]),
                         canComplete(){ 
                                 return player.an.genes.points.gte(tmp.sp.challenges[12].goal)
                         },
@@ -41729,7 +41736,7 @@ addLayer("sp", {
                         reward(){
                                 return Decimal.pow(1e6, player.sp.challenges[21])
                         },
-                        goal: () => Decimal.pow(10, [86220, 89696.3, 94620, 133140.5, 137630.3, 1e6][player.sp.challenges[21]]),
+                        goal: () => Decimal.pow(10, [86220, 89696.3, 94617, 133140.5, 137630.3, 1e6][player.sp.challenges[21]]),
                         canComplete(){ 
                                 return player.an.genes.points.gte(tmp.sp.challenges[21].goal)
                         },
@@ -41760,7 +41767,7 @@ addLayer("sp", {
                         reward(){
                                 return Decimal.times(.0005, player.sp.challenges[22] + (player.sp.challenges[22] > 0))
                         },
-                        goal: () => Decimal.pow(10, [223586, 253135, 425120, 452350, 532868, 1e6][player.sp.challenges[22]]),
+                        goal: () => Decimal.pow(10, [223586, 253135, 425120, 456900, 532850, 1e6][player.sp.challenges[22]]),
                         canComplete(){ 
                                 return player.an.genes.points.gte(tmp.sp.challenges[22].goal)
                         },
@@ -41786,7 +41793,7 @@ addLayer("sp", {
                         reward(){
                                 return new Decimal(player.sp.challenges[31] * 20)
                         },
-                        goal: () => Decimal.pow(10, [181097, 188988.3, 221500, 239860, 281e3, 91e6][player.sp.challenges[31]]),
+                        goal: () => Decimal.pow(10, [180925, 188845, 221350, 239825, 280835, 91e6][player.sp.challenges[31]]),
                         canComplete(){ 
                                 return player.an.genes.points.gte(tmp.sp.challenges[31].goal)
                         },
@@ -45448,9 +45455,9 @@ addLayer("hu", {
                                 return "<bdi style='color: #" + getUndulatingColor() + "'>Humans XXXIII"
                         },
                         description(){
-                                if (hasMilestone("r", 6) && !player.shiftAlias) return "The Flower base is 2"
-                                if (player.r.unlocked) return "At 3e12,683 / 3e12,704 Humans the Flower base is 8 / 2"
-                                return "Bulk 100x Plant buyables and at 3e12,683 / 3e12,704 Humans the Flower base is 8 / 2"
+                                if (hasMilestone("r", 6) && !player.shiftAlias) return "The Flower cost base is 2"
+                                if (player.r.unlocked) return "At 3e12,683 / 3e12,704 Humans the Flower cost base is 8 / 2"
+                                return "Bulk 100x Plant buyables and at 3e12,683 / 3e12,704 Humans the Flower cost base is 8 / 2"
                         },
                         cost:() => new Decimal("1e12478"),
                         unlocked(){
@@ -47079,6 +47086,7 @@ addLayer("hu", {
                                         let lvl = "<b><h2>Levels</h2>: " + formatWhole(player.hu.buyables[32]) + "</b><br>"
                                         let eff1 = "<b><h2>Effect</h2>: -"
                                         let eff2 = format(tmp.hu.buyables[32].effect, 3) + " from <i>IttIa</i> cost base (softcap at 10<sup>**</sup>)</b><br>"
+                                        if (hasMilestone("hu", 64)) eff2 = eff2.replace("</i>", "</i> and <i>Hiawd</i>")
                                         let cost = "<b><h2>Cost</h2>: " + formatWhole(getBuyableCost("hu", 32)) + " Thoughts</b><br>"
 
                                         return br + lvl + eff1 + eff2 + cost + "Shift to see details"
@@ -47477,11 +47485,11 @@ addLayer("hu", {
                 }, // hasMilestone("hu", 5)
                 6: {
                         requirementDescription(){
-                                if (player.hu.times <= 20) return "Reach 20 Human resets to view!"
+                                if (player.hu.times < 20) return "Unknown for now. Reach 20 Human resets to view!"
                                 return "255 Plants"
                         },
                         done(){
-                                if (player.hu.times <= 20) return false
+                                if (player.hu.times < 20) return false
                                 return player.pl.points.gte(255)
                         },
                         unlocked(){
@@ -48344,7 +48352,7 @@ addLayer("hu", {
                                 return hasMilestone("hu", 6)
                         },
                         effectDescription(){
-                                return "Reward: Per <i>Tinhiragt</i> past 200 (max 100) subtract .0001 from the Mastery III base and at 3e9346 Humans add .001 to the <i>GmaptsaIwmte</i> base."
+                                return "Reward: Per <i>Tinhiragt</i> past 200 (max 100) subtract .0001 from the Mastery III base and at 3e9346 Humans add .0001 to the <i>GmaptsaIwmte</i> base."
                         },
                 }, // hasMilestone("hu", 61)
                 62: {
@@ -48458,7 +48466,7 @@ addLayer("hu", {
                                 return hasMilestone("hu", 6)
                         },
                         effectDescription(){
-                                let r = "Reward: <i>GmaptsaIwmte</i> base is 20,960 - levels and at 3e16,881 Humans <i>Tinhragt</i> levels subtract from its base, multiplied by 1.3 / 1.6 / 2 at 1e17,975 / 3e18,160 / 3e18,221 Humans."
+                                let r = "Reward: <i>GmaptsaIwmte</i> base is 20,960 - levels and at 3e16,881 Humans <i>Tinhragt</i> levels subtract from its cost base, multiplied by 1.3 / 1.6 / 2 at 1e17,975 / 3e18,160 / 3e18,221 Humans."
                                 if (player.r.unlocked) return r.replace("20,960", makeRed("20,900"))
                                 return r
                         },
@@ -48530,7 +48538,7 @@ addLayer("hu", {
                                 return hasMilestone("hu", 6)
                         },
                         effectDescription(){
-                                return "Reward: The <i>Tinhiragt</i> base is <i>Hual</i> levels, each second since the previous purchase of a Human buyable increases the thought gain by 2% (max 3 minutes), and at 1e25,589, 3e25,624, 1e25,652, 1e25,700, and 1e25,774 Humans the Nucleus cost exponent is decreased by 0.002 ."
+                                return "Reward: The <i>Tinhiragt</i> base is <i>Hual</i> levels, each second since the previous purchase of a Human buyable increases the thought gain by 2% (max 3 minutes, exponential), and at 1e25,589, 3e25,624, 1e25,652, 1e25,700, and 1e25,774 Humans the Nucleus cost exponent is decreased by 0.002 ."
                         },
                 }, // hasMilestone("hu", 74)
                 75: {
